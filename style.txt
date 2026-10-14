@@ -1,0 +1,384 @@
+/* RESET DE ESTILOS GENERALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f7f9fa;
+    color: #1a1a1a;
+}
+
+/* NAVBAR (IGUAL A FIGMA) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ff4747; /* Rojo característico de tus fotos */
+    letter-spacing: -1px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-menu {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* HERO CON IMAGEN DE FONDO DE TUS FOTOS */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 15px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* CONTAINER DEL BUSCADOR HORIZONTAL */
+.search-box-container {
+    display: flex;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.search-input-group {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #e0e0e0;
+    padding: 5px 12px;
+}
+
+.search-input-group:last-of-type {
+    border-right: none;
+}
+
+.search-input-group .icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.search-input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-search {
+    background-color: #007faf;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* LAYOUT DE LOS RESULTADOS */
+.results-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+    padding: 40px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.filters-sidebar {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    height: fit-content;
+}
+
+.filters-sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+.filter-group input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.price-indicator {
+    text-align: right;
+    font-weight: bold;
+    color: #007faf;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* TARJETAS DE HOTELES (ESTILO EXACTO DE TU SEGUNDA FOTO) */
+.hotels-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hotel-card {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.hotel-img-container {
+    width: 260px;
+    height: 180px;
+    position: relative;
+}
+
+.hotel-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hotel-details {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.stars {
+    color: #ffb700;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.rating-badge {
+    display: inline-block;
+    background-color: #0b7000;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.hotel-pricing-area {
+    width: 200px;
+    border-left: 1px solid #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.web-source {
+    font-size: 11px;
+    color: #777;
+}
+
+.hotel-price {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 4px 0;
+}
+
+.price-subtext {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.btn-view-deal {
+    background-color: #007faf;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+/* SECCIÓN DESTINOS ABAJO (IGUAL A TU TERCERA FOTO) */
+.popular-destinations {
+    padding: 40px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.popular-destinations h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.popular-destinations p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.destination-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #e5e5e5;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.destination-info {
+    padding: 15px;
+}
+
+.destination-info h3 {
+    font-size: 16px;
+}
+
+.destination-info p {
+    font-size: 13px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* FOOTER CORPORATIVO (FOTO 3 CON REQUISITO DE PASARELAS) */
+footer {
+    background-color: #0a1f2c; /* Color oscuro idéntico a tu pie de página */
+    color: white;
+    padding: 40px 60px;
+    margin-top: 60px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #233946;
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+}
+
+.logo-footer {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ff4747;
+    margin-bottom: 5px;
+}
+
+.footer-brand p {
+    color: #9cb1be;
+    font-size: 13px;
+}
+
+.footer-payments-box h4 {
+    font-size: 13px;
+    color: #9cb1be;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.payment-badges {
+    display: flex;
+    gap: 10px;
+}
+
+.badge {
+    background-color: #172f3e;
+    border: 1px solid #2d4858;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 12px;
+    color: #728a98;
+}
+
+/* RESPONSIVE DESIGN (AUDITORÍA MÓVIL REQUISITO EXAMEN) */
+@media (max-width: 768px) {
+    .navbar { padding: 15px 20px; }
+    .search-box-container { flex-direction: column; }
+    .search-input-group { border-right: none; border-bottom: 1px solid #eee; padding: 10px; }
+    .results-layout { grid-template-columns: 1fr; padding: 20px; }
+    .hotel-card { flex-direction: column; }
+    .hotel-img-container { width: 100%; height: 200px; }
+    .hotel-pricing-area { width: 100%; border-left: none; border-top: 1px solid #eee; align-items: center; }
+    .destinations-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trivago - Tu próxima escapada, al mejor precio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR SUPERIOR -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">trivago</div>
+            <ul class="nav-menu">
+                <li><a href="#">❤️ Mis Favoritos</a></li>
+                <li><a href="#">👤 Iniciar Sesión</a></li>
+                <li><a href="#" class="btn-menu">Menú</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HERO SECTION / BUSCADOR PRINCIPAL -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Tu próxima escapada,<br>al mejor precio.</h1>
+                <p>Compara hoteles y ofertas de cientos de webs. Tu viaje empieza aquí.</p>
+                
+                <div class="search-box-container">
+                    <div class="search-input-group">
+                        <span class="icon">📍</span>
+                        <input type="text" id="search-destination" value="Cusco, Perú">
+                    </div>
+                    <div class="search-input-group">
+                        <span class="icon">📅</span>
+                        <input type="text" value="23 oct 2026">
+                    </div>
+                    <div class="search-input-group">
+                        <span class="icon">📅</span>
+                        <input type="text" value="26 oct 2026">
+                    </div>
+                    <div class="search-input-group">
+                        <span class="icon">👥</span>
+                        <input type="text" value="2 adultos - 1 habitación">
+                    </div>
+                    <button class="btn-search" onclick="buscarHoteles()">🔍 Buscar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE RESULTADOS -->
+        <section class="results-layout">
+            <!-- Barra de Filtros Lateral (Requisito de la guía) -->
+            <aside class="filters-sidebar">
+                <h3>Filtrar resultados</h3>
+                <div class="filter-group">
+                    <label>Precio Máximo por noche:</label>
+                    <input type="range" id="price-filter" min="100" max="600" step="10" value="600" oninput="actualizarPrecio(this.value)">
+                    <div class="price-indicator"><span id="price-value">S/. 600</span></div>
+                </div>
+            </aside>
+
+            <!-- Contenedor de las Tarjetas de Hoteles -->
+            <div class="hotels-list" id="hotels-container">
+                <!-- Las tarjetas idénticas a tu Figma se cargan automáticamente aquí con JavaScript -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN DESTINOS POPULARES (IGUAL A TU TERCERA FOTO) -->
+        <section class="popular-destinations">
+            <h2>Tu próximo destino te está esperando</h2>
+            <p>Cientos de webs. Descubre hoteles en algunas de nuestras ciudades favoritas.</p>
+            
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="https://unsplash.com" alt="Lima">
+                    <div class="destination-info">
+                        <h3>Lima</h3>
+                        <p>Desde S/. 178 / noche</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://unsplash.com" alt="Cusco">
+                    <div class="destination-info">
+                        <h3>Cusco</h3>
+                        <p>Desde S/. 215 / noche</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://unsplash.com" alt="Máncora">
+                    <div class="destination-info">
+                        <h3>Máncora</h3>
+                        <p>Desde S/. 156 / noche</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER COMPLETO CON ARQUITECTURA DE PAGOS INTEGRADA -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">trivago</div>
+                <p>Tu comparador global de confianza adaptado al mercado peruano.</p>
+            </div>
+            <div class="footer-payments-box">
+                <h4>Pasarelas de Pago Autorizadas (Sección 2)</h4>
+                <div class="payment-badges">
+                    <span class="badge">Yape</span>
+                    <span class="badge">Plin</span>
+                    <span class="badge">Visa (Niubiz)</span>
+                    <span class="badge">Culqi</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 trivago | Todos los derechos reservados | Proyecto Integrador PA2</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
