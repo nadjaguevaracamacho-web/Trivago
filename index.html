@@ -8,119 +8,183 @@
 </head>
 <body>
 
-    <!-- NAVBAR SUPERIOR -->
-    <header>
-        <nav class="navbar">
+    <!-- HEADER AZUL OSCURO (FOTO 1 Y 2) -->
+    <header class="main-header">
+        <div class="header-container">
             <div class="logo">trivago</div>
-            <ul class="nav-menu">
-                <li><a href="#">❤️ Mis Favoritos</a></li>
-                <li><a href="#">👤 Iniciar Sesión</a></li>
-                <li><a href="#" class="btn-menu">Menú</a></li>
-            </ul>
-        </nav>
+            <div class="header-right">
+                <span>❤️ Mis favoritos</span>
+                <span>💼 CO - PEN</span>
+                <span>👤 Iniciar sesión</span>
+                <button class="btn-menu">Menú</button>
+            </div>
+        </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main>
-        <!-- HERO SECTION / BUSCADOR PRINCIPAL -->
-        <section class="hero-section">
-            <div class="hero-content">
+    <!-- CUERPO PRINCIPAL DEL PROYECTO -->
+    <main class="app-container">
+        
+        <!-- FLUJO DE RESERVAS / PASARELA DE PAGO (FOTO 1) -->
+        <section id="checkout-view" class="checkout-section" style="display: none;">
+            <div class="checkout-steps">
+                <span>✓ Tus datos</span>
+                <span class="active">2. Reservas y pago</span>
+                <span>3. Confirmación</span>
+            </div>
+            
+            <div class="checkout-content">
+                <!-- Formulario de datos -->
+                <div class="checkout-form">
+                    <h2>Completa tu reserva</h2>
+                    <p class="subtitle">Tu escapada a Cusco está a un solo paso. Revisa tu estancia y elige cómo pagar.</p>
+                    
+                    <div class="form-card">
+                        <h3>1. Tus datos</h3>
+                        <p class="form-notice">Introduce los datos del titular de la reserva. Todos los campos son obligatorios.</p>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Nombre</label>
+                                <input type="text" value="Lucía" readonly>
+                            </div>
+                            <div class="input-group">
+                                <label>Apellidos</label>
+                                <input type="text" value="García López" readonly>
+                            </div>
+                            <div class="input-group">
+                                <label>Correo electrónico</label>
+                                <input type="email" value="lucia.garcia@gmail.com" readonly>
+                            </div>
+                            <div class="input-group">
+                                <label>Teléfono</label>
+                                <input type="text" value="+51 987 654 321" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métodos de pago peruanizados (Exigencia del examen) -->
+                    <div class="form-card">
+                        <h3>2. Elige cómo pagar</h3>
+                        <div class="payment-methods-grid">
+                            <div class="payment-method-option active">
+                                <input type="radio" checked>
+                                <span class="method-title">💳 Tarjeta</span>
+                                <p class="method-desc">Débito o Crédito (Visa / Culqi)</p>
+                            </div>
+                            <div class="payment-method-option" onclick="alert('Billetera Yape habilitada para el pago seguro.')">
+                                <input type="radio">
+                                <span class="method-title">📱 Yape</span>
+                                <p class="method-desc">Código QR rápido</p>
+                            </div>
+                            <div class="payment-method-option" onclick="alert('PagoEfectivo habilitado para banca móvil.')">
+                                <input type="radio">
+                                <span class="method-title">🏦 PagoEfectivo</span>
+                                <p class="method-desc">Código CIP en efectivo</p>
+                            </div>
+                        </div>
+
+                        <!-- Simulación formulario tarjeta -->
+                        <div class="card-details-fields">
+                            <div class="input-group full-width">
+                                <label>Datos de la tarjeta</label>
+                                <input type="text" placeholder="Número de tarjeta" value="4557 8800 0000 0000" readonly>
+                            </div>
+                            <div class="form-grid" style="margin-top: 15px;">
+                                <div class="input-group">
+                                    <label>Fecha de vencimiento</label>
+                                    <input type="text" value="08/29" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label>Código de seguridad (CVV)</label>
+                                    <input type="password" value="123" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen de compra lateral -->
+                <div class="checkout-summary">
+                    <div class="summary-card">
+                        <span class="summary-badge">Tu reserva, de un vistazo</span>
+                        <img src="https://unsplash.com" alt="Hotel Monasterio">
+                        <div class="summary-hotel-info">
+                            <span class="hotel-stars">⭐⭐⭐⭐</span>
+                            <h3>Hotel Monasterio</h3>
+                            <p class="hotel-loc">📍 Cusco, Perú | Centro histórico</p>
+                            
+                            <div class="dates-box-summary">
+                                <div><strong>23 oct 2026</strong><br><small>Entrada</small></div>
+                                <div><strong>26 oct 2026</strong><br><small>Salida</small></div>
+                            </div>
+                            <span class="free-cancel-tag">✓ Cancelación gratuita</span>
+                            
+                            <div class="price-breakdown">
+                                <p>Detalle del precio</p>
+                                <div class="price-row"><span>189 S/. x 3 noches</span><strong>567 S/.</strong></div>
+                            </div>
+                            <div class="price-total-row">
+                                <span>Total</span>
+                                <span class="total-amount">567 S/.</span>
+                            </div>
+                            <button class="btn-finalize" onclick="procesarPagoExitoso()">Realizar reserva →</button>
+                            <button class="btn-back" onclick="regresarAlCatálogo()">← Volver a resultados</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATALOGO COMPARTIDO DE HOTELES Y BUSCADOR (FOTO 2 Y 3) -->
+        <section id="catalog-view" class="catalog-section">
+            
+            <!-- Banner azul con textos exactos de tu Foto 2 -->
+            <div class="hero-banner">
                 <h1>Tu próxima escapada,<br>al mejor precio.</h1>
                 <p>Compara hoteles y ofertas de cientos de webs. Tu viaje empieza aquí.</p>
                 
-                <div class="search-box-container">
-                    <div class="search-input-group">
-                        <span class="icon">📍</span>
-                        <input type="text" id="search-destination" value="Cusco, Perú">
+                <!-- Buscador del prototipo -->
+                <div class="search-bar-widget">
+                    <div class="search-field">
+                        <span class="field-icon">📍</span>
+                        <input type="text" value="Cusco, Perú" readonly>
                     </div>
-                    <div class="search-input-group">
-                        <span class="icon">📅</span>
-                        <input type="text" value="23 oct 2026">
+                    <div class="search-field">
+                        <span class="field-icon">📅</span>
+                        <input type="text" value="23 oct 2026" readonly>
                     </div>
-                    <div class="search-input-group">
-                        <span class="icon">📅</span>
-                        <input type="text" value="26 oct 2026">
+                    <div class="search-field">
+                        <span class="field-icon">📅</span>
+                        <input type="text" value="26 oct 2026" readonly>
                     </div>
-                    <div class="search-input-group">
-                        <span class="icon">👥</span>
-                        <input type="text" value="2 adultos - 1 habitación">
+                    <div class="search-field">
+                        <span class="field-icon">👥</span>
+                        <input type="text" value="2 adultos - 1 habitación" readonly>
                     </div>
-                    <button class="btn-search" onclick="buscarHoteles()">🔍 Buscar</button>
+                    <button class="btn-search-action">🔍 Buscar</button>
                 </div>
             </div>
-        </section>
 
-        <!-- SECCIÓN DE RESULTADOS -->
-        <section class="results-layout">
-            <!-- Barra de Filtros Lateral (Requisito de la guía) -->
-            <aside class="filters-sidebar">
-                <h3>Filtrar resultados</h3>
-                <div class="filter-group">
-                    <label>Precio Máximo por noche:</label>
-                    <input type="range" id="price-filter" min="100" max="600" step="10" value="600" oninput="actualizarPrecio(this.value)">
-                    <div class="price-indicator"><span id="price-value">S/. 600</span></div>
-                </div>
-            </aside>
-
-            <!-- Contenedor de las Tarjetas de Hoteles -->
-            <div class="hotels-list" id="hotels-container">
-                <!-- Las tarjetas idénticas a tu Figma se cargan automáticamente aquí con JavaScript -->
-            </div>
-        </section>
-
-        <!-- SECCIÓN DESTINOS POPULARES (IGUAL A TU TERCERA FOTO) -->
-        <section class="popular-destinations">
-            <h2>Tu próximo destino te está esperando</h2>
-            <p>Cientos de webs. Descubre hoteles en algunas de nuestras ciudades favoritas.</p>
-            
-            <div class="destinations-grid">
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Lima">
-                    <div class="destination-info">
-                        <h3>Lima</h3>
-                        <p>Desde S/. 178 / noche</p>
+            <!-- Distribución Grid: Filtros a la izquierda, Tarjetas a la derecha -->
+            <div class="layout-main-grid">
+                
+                <!-- Filtros laterales -->
+                <aside class="sidebar-filters">
+                    <h3>Filtrar resultados</h3>
+                    <div class="filter-box">
+                        <label>Precio Máximo por noche:</label>
+                        <input type="range" id="price-slider" min="100" max="600" step="10" value="600" oninput="filtrarPorPrecio(this.value)">
+                        <div class="slider-val-output"><span id="slider-display">S/. 600</span></div>
                     </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Cusco">
-                    <div class="destination-info">
-                        <h3>Cusco</h3>
-                        <p>Desde S/. 215 / noche</p>
+                    <div class="filter-static-group">
+                        <p class="filter-title">Compara en un solo lugar</p>
+                        <p class="filter-subtitle">Encuentra un gran precio</p>
                     </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Máncora">
-                    <div class="destination-info">
-                        <h3>Máncora</h3>
-                        <p>Desde S/. 156 / noche</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+                </aside>
 
-    <!-- FOOTER COMPLETO CON ARQUITECTURA DE PAGOS INTEGRADA -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="logo-footer">trivago</div>
-                <p>Tu comparador global de confianza adaptado al mercado peruano.</p>
-            </div>
-            <div class="footer-payments-box">
-                <h4>Pasarelas de Pago Autorizadas (Sección 2)</h4>
-                <div class="payment-badges">
-                    <span class="badge">Yape</span>
-                    <span class="badge">Plin</span>
-                    <span class="badge">Visa (Niubiz)</span>
-                    <span class="badge">Culqi</span>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 trivago | Todos los derechos reservados | Proyecto Integrador PA2</p>
-        </div>
-    </footer>
+                <!-- Listado Dinámico de Hoteles (Foto 2 y 3) -->
+                <div class="hotels-container-list">
+                    <h2 class="section-title-cusco">Una escapada a Cusco empieza aquí</h2>
+                    <p class="section-subtitle-cusco">Hoteles que nos encantan para el 23 - 26 de octubre • 2 adultos • 1 habitación</p>
+                    
+                    <div id="hotels-grid-target" class="hotels-flex-wrapper">
 
-    <script src="script.js"></script>
-</body>
-</html>
