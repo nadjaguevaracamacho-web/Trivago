@@ -1,166 +1,30 @@
-/* --- ESTILOS GENERALES Y RESET --- */
-:root {
-    --primary-color: #007faf; /* Azul Trivago */
-    --accent-color: #f48120;  /* Naranja Trivago para botones */
-    --bg-light: #f6f7f9;     /* Fondo general */
-    --bg-white: #ffffff;
-    --text-color: #1a1a1a;
-    --text-light: #595959;
-    --border-color: #e5e5e5;
-    --font-main: 'Montserrat', sans-serif;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* --- CORRECCIÓN RÁPIDA DE VISUALIZACIÓN --- */
+.hidden {
+    display: none !important;
 }
 
 body {
-    font-family: var(--font-main);
-    color: var(--text-color);
-    background-color: var(--bg-light);
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f7f9;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: var(--primary-color);
-}
-
-ul {
-    list-style: none;
-}
-
-button {
-    font-family: inherit;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-input {
-    font-family: inherit;
-    font-size: 16px;
-}
-
-/* Clases de utilidad */
-.hidden { display: none !important; }
-.icon { width: 18px; height: 18px; margin-right: 8px; vertical-align: middle; }
-
-/* --- BOTONES --- */
-.btn-search {
-    background-color: var(--accent-color);
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 15px 30px;
-    border-radius: 4px;
-    letter-spacing: 0.5px;
-    width: 100%;
-}
-
-.btn-search:hover {
-    background-color: #e3761a;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 12px 20px;
-    border-radius: 4px;
-    text-transform: uppercase;
-}
-
-.btn-primary:hover {
-    background-color: #006a92;
-}
-
-/* --- CABECERA --- */
-.main-header {
-    background-color: var(--bg-white);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.trivago-logo {
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-.trivago-logo::before { content: 'tri'; color: #007faf; }
-.trivago-logo::after { content: 'vago'; color: #c94a30; }
-
-.main-nav ul {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-.main-nav a {
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    color: #333;
-}
-
-.menu-btn {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 4px;
-}
-.menu-btn:hover { background-color: #f1f1f1; }
-
-/* --- SECTION 1: HERO, SLIDER Y BUSCADOR --- */
-.hero-section {
-    position: relative;
-    color: white;
-}
-
-/* Slider */
+/* Asegurar que el banner slider tome altura y muestre la imagen */
 .slider-container {
     position: relative;
     width: 100%;
-    height: 55vh;
-    min-height: 420px;
+    height: 500px;
     overflow: hidden;
-    background-color: #1a1a1a;
+    background-color: #333;
 }
 
 .slider-wrapper {
     display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     width: 300%;
     height: 100%;
+    transition: transform 0.5s ease;
 }
 
 .slide {
@@ -168,9 +32,24 @@ input {
     height: 100%;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
 }
 
-/* Controles del Slider */
-.slider-prev, .slider-next {
+/* Estilo básico del buscador flotante */
+.search-overlay {
     position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+}
+
+.search-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
+}
