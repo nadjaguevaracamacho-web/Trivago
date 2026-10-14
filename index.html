@@ -3,125 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>trivago - Tu próxima escapada, al mejor precio</title>
+    <title>Trivago - Encuentra tu hotel ideal al mejor precio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- NAVBAR SUPERIOR -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">trivago</div>
-            <ul class="nav-menu">
-                <li><a href="#">❤️ Mis Favoritos</a></li>
-                <li><a href="#">👤 Iniciar Sesión</a></li>
-                <li><a href="#" class="btn-menu">Menú</a></li>
-            </ul>
-        </nav>
+    <!-- CABECERA -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <span class="trivago-logo">trivago</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#"><img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon.png" alt="Favoritos" class="icon"> Mis Favoritos</a></li>
+                    <li><a href="#"><img src="https://img.icons8.com/material-rounded/24/000000/user.png" alt="Inicia Sesión" class="icon"> Inicia Sesión</a></li>
+                    <li class="menu-item"><button class="menu-btn">Menú</button></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main>
-        <!-- HERO SECTION / BUSCADOR PRINCIPAL -->
+        
+        <!-- SECCIÓN 1: HERO / BANNER SLIDER CON BUSCADOR -->
         <section class="hero-section">
-            <div class="hero-content">
-                <h1>Tu próxima escapada,<br>al mejor precio.</h1>
-                <p>Compara hoteles y ofertas de cientos de webs. Tu viaje empieza aquí.</p>
+            <div class="slider-container">
+                <div class="slider-wrapper" id="slider-wrapper"></div>
+                <button class="slider-prev" id="prevSlide">&#10094;</button>
+                <button class="slider-next" id="nextSlide">&#10095;</button>
+            </div>
+
+            <div class="search-overlay">
+                <div class="container search-container">
+                    <h1 class="hero-title">Tu próxima escapada, al mejor precio.</h1>
+                    <p class="hero-subtitle">Compara y reserva tu hotel ideal con un par de clics.</p>
+
+                    <!-- BUSCADOR PRINCIPAL -->
+                    <form class="search-form" id="search-form">
+                        <div class="form-group destination-group">
+                            <label for="destination">¿A dónde quieres ir?</label>
+                            <input type="text" id="destination" placeholder="p.ej. Cusco, Lima o Máncora" required>
+                        </div>
+                        <div class="form-group date-group">
+                            <label for="checkin">Entrada</label>
+                            <input type="date" id="checkin" required>
+                        </div>
+                        <div class="form-group date-group">
+                            <label for="checkout">Salida</label>
+                            <input type="date" id="checkout" required>
+                        </div>
+                        <div class="form-group guests-group">
+                            <label for="guests">Huéspedes y Habitaciones</label>
+                            <input type="text" id="guests" placeholder="2 adultos · 1 hab." required>
+                        </div>
+                        
+                        <div class="search-btn-wrapper">
+                            <button type="submit" class="btn-search">BUSCAR</button>
+                            <div class="search-submenu">
+                                <h3>Destinos populares</h3>
+                                <ul>
+                                    <li><a href="#" data-destination="Lima">Lima</a></li>
+                                    <li><a href="#" data-destination="Cusco">Cusco</a></li>
+                                    <li><a href="#" data-destination="Máncora">Máncora</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: RESULTADOS DE BÚSQUEDA -->
+        <section id="results-section" class="results-section hidden">
+            <div class="container">
+                <div class="results-header">
+                    <h2>Resultados para tu viaje</h2>
+                    <p id="search-summary"></p>
+                </div>
+                <div class="results-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: RESERVA Y PAGO -->
+        <section id="booking-section" class="booking-section hidden">
+            <div class="container">
+                <h2>Completa tu reserva</h2>
+                <div class="booking-grid">
+                    <form class="booking-form" id="booking-form">
+                        <div class="step-card">
+                            <h3>1. Tus datos</h3>
+                            <p class="step-desc">Completa todos los campos para continuar.</p>
+                            <div class="form-row">
+                                <input type="text" placeholder="Nombre" required>
+                                <input type="text" placeholder="Apellidos" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="email" placeholder="Correo electrónico" required>
+                                <input type="tel" placeholder="Teléfono" required>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <h3>2. Elige cómo pagar</h3>
+                            <p class="step-desc">Elige el método de pago que prefieras.</p>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment-method" value="card" checked>
+                                    <span class="option-content">
+                                        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                                        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                                        Tarjeta de crédito o débito
+                                    </span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment-method" value="paypal">
+                                    <span class="option-content">
+                                        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal">
+                                        PayPal
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="payment-details card-details">
+                                <div class="form-group">
+                                    <label>Nombre en la tarjeta</label>
+                                    <input type="text" placeholder="Ej. Juan Pérez">
+                                </div>
+                                <div class="form-group">
+                                    <label>Número de la tarjeta</label>
+                                    <input type="text" placeholder="0000 0000 0000 0000">
+                                </div>
+                                <div class="form-row card-meta">
+                                    <input type="text" placeholder="Venc. MM/AA">
+                                    <input type="text" placeholder="CVC">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Finalizar reserva</button>
+                    </form>
+
+                    <aside class="booking-summary" id="booking-summary-aside"></aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: DESTINOS POPULARES -->
+        <section class="destinations-section">
+            <div class="container">
+                <h2>Tu próximo destino te está esperando</h2>
+                <p class="destinations-subtitle">Compara y reserva tu hotel ideal con un par de clics.</p>
                 
-                <div class="search-box-container">
-                    <div class="search-input-group">
-                        <span class="icon">📍</span>
-                        <input type="text" id="search-destination" value="Cusco, Perú" readonly>
-                    </div>
-                    <div class="search-input-group">
-                        <span class="icon">📅</span>
-                        <input type="text" value="23 oct 2026" readonly>
-                    </div>
-                    <div class="search-input-group">
-                        <span class="icon">📅</span>
-                        <input type="text" value="26 oct 2026" readonly>
-                    </div>
-                    <div class="search-input-group">
-                        <span class="icon">👥</span>
-                        <input type="text" value="2 adultos - 1 habitación" readonly>
-                    </div>
-                    <button class="btn-search" onclick="buscarHoteles()">🔍 Buscar</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN DE RESULTADOS -->
-        <section class="results-layout">
-            <!-- Barra de Filtros Lateral -->
-            <aside class="filters-sidebar">
-                <h3>Filtrar resultados</h3>
-                <div class="filter-group">
-                    <label for="price-filter">Precio Máximo por noche:</label>
-                    <input type="range" id="price-filter" min="100" max="600" step="10" value="600" oninput="actualizarPrecio(this.value)">
-                    <div class="price-indicator"><span id="price-value">S/. 600</span></div>
-                </div>
-            </aside>
-
-            <!-- Contenedor Dinámico de Tarjetas de Hoteles -->
-            <div class="hotels-list" id="hotels-container">
-                <!-- Se generan automáticamente aquí con JavaScript -->
-            </div>
-        </section>
-
-        <!-- SECCIÓN DESTINOS POPULARES -->
-        <section class="popular-destinations">
-            <h2>Tu próximo destino te está esperando</h2>
-            <p>Cientos de webs. Descubre hoteles en algunas de nuestras ciudades favoritas.</p>
-            
-            <div class="destinations-grid">
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Lima">
-                    <div class="destination-info">
-                        <h3>Lima</h3>
-                        <p>Desde S/. 178 / noche</p>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Cusco">
-                    <div class="destination-info">
-                        <h3>Cusco</h3>
-                        <p>Desde S/. 215 / noche</p>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://unsplash.com" alt="Máncora">
-                    <div class="destination-info">
-                        <h3>Máncora</h3>
-                        <p>Desde S/. 156 / noche</p>
-                    </div>
+                <div class="destinations-grid">
+                    <article class="destination-card">
+                        <!-- Imagen fija de Lima (Costa Verde / Miraflores) -->
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Vista de Lima, Perú">
+                        <div class="destination-info">
+                            <h3>Lima</h3>
+                            <p>Desde S/ 178 / noche</p>
+                        </div>
+                    </article>
+                    
+                    <article class="destination-card">
+                        <!-- Imagen fija de Cusco (Machu Picchu / Andes) -->
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80" alt="Vista de Cusco, Perú">
+                        <div class="destination-info">
+                            <h3>Cusco</h3>
+                            <p>Desde S/ 215 / noche</p>
+                        </div>
+                    </article>
+                    
+                    <article class="destination-card">
+                        <!-- Imagen fija de Máncora (Playa norteña) -->
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Vista de Máncora, Perú">
+                        <div class="destination-info">
+                            <h3>Máncora</h3>
+                            <p>Desde S/ 156 / noche</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- PIE DE PÁGINA CON PASARELAS DE PAGO -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="logo-footer">trivago</div>
-                <p>Tu comparador global de confianza adaptado al mercado peruano.</p>
+    <!-- PIE DE PÁGINA -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="logo">
+                <span class="trivago-logo">trivago</span>
             </div>
-            <div class="footer-payments-box">
-                <h4>Pasarelas de Pago Autorizadas (Sección 2)</h4>
-                <div class="payment-badges">
-                    <span class="badge">Yape</span>
-                    <span class="badge">Plin</span>
-                    <span class="badge">Visa (Niubiz)</span>
-                    <span class="badge">Culqi</span>
-                </div>
+            <p>&copy; 2026 trivago | Todos los derechos reservados</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Contacto</a>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 trivago | Todos los derechos reservados | Proyecto Integrador PA2</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
