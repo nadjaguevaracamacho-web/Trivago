@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivago - Encuentra tu hotel ideal al mejor precio</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Fuente Montserrat para que el diseño coincida con el prototipo -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -60,6 +61,7 @@
                             <input type="text" id="guests" placeholder="2 adultos · 1 hab." required>
                         </div>
                         
+                        <!-- BOTÓN CON SUBMENÚ DE CIUDADES -->
                         <div class="search-btn-wrapper">
                             <button type="submit" class="btn-search">BUSCAR</button>
                             <div class="search-submenu">
@@ -76,7 +78,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 2: RESULTADOS DE BÚSQUEDA -->
+        <!-- SECCIÓN 2: RESULTADOS DE BÚSQUEDA (Oculta al inicio) -->
         <section id="results-section" class="results-section hidden">
             <div class="container">
                 <div class="results-header">
@@ -87,7 +89,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: RESERVA Y PAGO -->
+        <!-- SECCIÓN 3: RESERVA Y PAGO (Oculta al inicio) -->
         <section id="booking-section" class="booking-section hidden">
             <div class="container">
                 <h2>Completa tu reserva</h2>
@@ -157,7 +159,6 @@
                 
                 <div class="destinations-grid">
                     <article class="destination-card">
-                        <!-- Imagen fija de Lima (Costa Verde / Miraflores) -->
                         <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Vista de Lima, Perú">
                         <div class="destination-info">
                             <h3>Lima</h3>
@@ -166,7 +167,6 @@
                     </article>
                     
                     <article class="destination-card">
-                        <!-- Imagen fija de Cusco (Machu Picchu / Andes) -->
                         <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80" alt="Vista de Cusco, Perú">
                         <div class="destination-info">
                             <h3>Cusco</h3>
@@ -175,7 +175,6 @@
                     </article>
                     
                     <article class="destination-card">
-                        <!-- Imagen fija de Máncora (Playa norteña) -->
                         <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Vista de Máncora, Perú">
                         <div class="destination-info">
                             <h3>Máncora</h3>
