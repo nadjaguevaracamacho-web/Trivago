@@ -1,13 +1,14 @@
-// Base de datos oficial de tus capturas de Figma (Cusco en Soles)
+// Base de datos de hoteles con imágenes estables de alta resolución
 const listaHoteles = [
-    { id: 1, nombre: "Hotel Monasterio", precio: 189, estrellas: "⭐⭐⭐⭐", calif: "8.5 Excelente", img: "https://unsplash.com" },
+    { id: 1, nombre: "Belmond Hotel Monasterio", precio: 189, estrellas: "⭐⭐⭐⭐", calif: "8.5 Excelente", img: "https://unsplash.com" },
     { id: 2, nombre: "Hotel Casa Andina Standard Cusco", precio: 156, estrellas: "⭐⭐⭐⭐", calif: "8.2 Muy Bueno", img: "https://unsplash.com" },
-    { id: 3, nombre: "Hotel Picoaga", precio: 172, estrellas: "⭐⭐⭐⭐", calif: "8.0 Bueno", img: "https://unsplash.com" }
+    { id: 3, nombre: "Hotel Picoaga Cusco", precio: 172, estrellas: "⭐⭐⭐⭐", calif: "8.0 Bueno", img: "https://unsplash.com" }
 ];
 
-// Inyectar las tarjetas en la página
+// Inyectar tarjetas dinámicamente en el catálogo
 function renderizarHoteles(hoteles) {
     const container = document.getElementById("hotels-container");
+    if (!container) return;
     container.innerHTML = "";
 
     if (hoteles.length === 0) {
@@ -20,7 +21,7 @@ function renderizarHoteles(hoteles) {
         card.className = "hotel-card";
         card.innerHTML = `
             <div class="hotel-img-container">
-                <img src="${hotel.img}" alt="${hotel.nombre}" loading="lazy">
+                <img src="${hotel.img}" alt="${hotel.nombre}">
             </div>
             <div class="hotel-details">
                 <div class="hotel-header">
@@ -40,12 +41,7 @@ function renderizarHoteles(hoteles) {
     });
 }
 
-// Simular el Checkout pasarela Culqi/Visa (Tu primera foto de Figma)
-function simularPago(nombreHotel, precio) {
-    alert(`[Pasarela de Pago Segura Culqi] \n\nIniciando Checkout móvil para: ${nombreHotel}\nMonto a procesar: S/. ${precio}\nMedios disponibles: Yape, Plin y Tarjetas Visa/Mastercard.`);
-}
-
-// Slider de precios dinámico
+// Filtro automático del slider
 function buscarHoteles() {
     const precioMaximo = parseInt(document.getElementById("price-filter").value);
     const filtrados = listaHoteles.filter(h => h.precio <= precioMaximo);
@@ -55,6 +51,11 @@ function buscarHoteles() {
 function actualizarPrecio(valor) {
     document.getElementById("price-value").innerText = `S/. ${valor}`;
     buscarHoteles();
+}
+
+// Ventana emergente con pasarela de pago (Culqi y Visa)
+function simularPago(nombreHotel, precio) {
+    alert(`[Pasarela de Pago Segura Culqi] \n\nIniciando checkout móvil para: ${nombreHotel}\nMonto a procesar: S/. ${precio}\n\nMedios integrados con éxito: Yape, Plin y Tarjetas Visa/Mastercard (Suite Cybersource).`);
 }
 
 window.onload = function() {
