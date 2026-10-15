@@ -3,204 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivago - Encuentra tu hotel ideal al mejor precio</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fuente Montserrat para que el diseño coincida con el prototipo -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Trivago Perú</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración de colores oficiales de Trivago -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trivago: {
+                            blue: '#007FAD',
+                            hoverBlue: '#00668a',
+                            darkBlue: '#0a1d2a',
+                            red: '#e05638',
+                            green: '#007f5f',
+                            yellow: '#f4c430'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Open Sans', sans-serif; }
+        .app-view { display: none; }
+        .app-view.active { display: block; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
 
-    <!-- CABECERA -->
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <span class="trivago-logo">trivago</span>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#"><img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon.png" alt="Favoritos" class="icon"> Mis Favoritos</a></li>
-                    <li><a href="#"><img src="https://img.icons8.com/material-rounded/24/000000/user.png" alt="Inicia Sesión" class="icon"> Inicia Sesión</a></li>
-                    <li class="menu-item"><button class="menu-btn">Menú</button></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main>
-        
-        <!-- SECCIÓN 1: HERO / BANNER SLIDER CON BUSCADOR -->
-        <section class="hero-section">
-            <div class="slider-container">
-                <div class="slider-wrapper" id="slider-wrapper"></div>
-                <button class="slider-prev" id="prevSlide">&#10094;</button>
-                <button class="slider-next" id="nextSlide">&#10095;</button>
-            </div>
-
-            <div class="search-overlay">
-                <div class="container search-container">
-                    <h1 class="hero-title">Tu próxima escapada, al mejor precio.</h1>
-                    <p class="hero-subtitle">Compara y reserva tu hotel ideal con un par de clics.</p>
-
-                    <!-- BUSCADOR PRINCIPAL -->
-                    <form class="search-form" id="search-form">
-                        <div class="form-group destination-group">
-                            <label for="destination">¿A dónde quieres ir?</label>
-                            <input type="text" id="destination" placeholder="p.ej. Cusco, Lima o Máncora" required>
-                        </div>
-                        <div class="form-group date-group">
-                            <label for="checkin">Entrada</label>
-                            <input type="date" id="checkin" required>
-                        </div>
-                        <div class="form-group date-group">
-                            <label for="checkout">Salida</label>
-                            <input type="date" id="checkout" required>
-                        </div>
-                        <div class="form-group guests-group">
-                            <label for="guests">Huéspedes y Habitaciones</label>
-                            <input type="text" id="guests" placeholder="2 adultos · 1 hab." required>
-                        </div>
-                        
-                        <!-- BOTÓN CON SUBMENÚ DE CIUDADES -->
-                        <div class="search-btn-wrapper">
-                            <button type="submit" class="btn-search">BUSCAR</button>
-                            <div class="search-submenu">
-                                <h3>Destinos populares</h3>
-                                <ul>
-                                    <li><a href="#" data-destination="Lima">Lima</a></li>
-                                    <li><a href="#" data-destination="Cusco">Cusco</a></li>
-                                    <li><a href="#" data-destination="Máncora">Máncora</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </form>
+    <!-- ========================================== -->
+    <!-- VISTA 1: INICIO Y RESULTADOS               -->
+    <!-- ========================================== -->
+    <div id="vista-inicio" class="app-view active">
+        <!-- HEADER -->
+        <header class="bg-white border-b border-gray-200 py-3 px-8 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <a href="javascript:void(0)" onclick="cambiarVista('vista-inicio')" class="flex items-center">
+                    <span class="text-trivago-blue font-extrabold text-3xl tracking-tight">tri</span><!--
+                 --><span class="text-trivago-red font-extrabold text-3xl tracking-tight">va</span><!--
+                 --><span class="text-trivago-yellow font-extrabold text-3xl tracking-tight">go</span>
+                </a>
+                <div class="flex items-center space-x-6 text-sm font-semibold">
+                    <button class="flex items-center text-gray-700 hover:text-black">
+                        <i class="fa-regular fa-heart text-lg mr-1.5"></i> Mis favoritos <span class="bg-red-600 text-white rounded-full text-xs px-1.5 py-0.5 ml-1">1</span>
+                    </button>
+                    <button class="flex items-center text-gray-700 hover:text-black">
+                        <i class="fa-solid fa-globe text-lg mr-1.5"></i> PE · PEN <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
+                    </button>
+                    <button class="border border-gray-300 rounded-md px-4 py-2 flex items-center space-x-2 text-gray-800 hover:bg-gray-50">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Iniciar sesión</span>
+                    </button>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <!-- SECCIÓN 2: RESULTADOS DE BÚSQUEDA (Oculta al inicio) -->
-        <section id="results-section" class="results-section hidden">
-            <div class="container">
-                <div class="results-header">
-                    <h2>Resultados para tu viaje</h2>
-                    <p id="search-summary"></p>
-                </div>
-                <div class="results-grid"></div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 3: RESERVA Y PAGO (Oculta al inicio) -->
-        <section id="booking-section" class="booking-section hidden">
-            <div class="container">
-                <h2>Completa tu reserva</h2>
-                <div class="booking-grid">
-                    <form class="booking-form" id="booking-form">
-                        <div class="step-card">
-                            <h3>1. Tus datos</h3>
-                            <p class="step-desc">Completa todos los campos para continuar.</p>
-                            <div class="form-row">
-                                <input type="text" placeholder="Nombre" required>
-                                <input type="text" placeholder="Apellidos" required>
-                            </div>
-                            <div class="form-row">
-                                <input type="email" placeholder="Correo electrónico" required>
-                                <input type="tel" placeholder="Teléfono" required>
-                            </div>
-                        </div>
-
-                        <div class="step-card">
-                            <h3>2. Elige cómo pagar</h3>
-                            <p class="step-desc">Elige el método de pago que prefieras.</p>
-                            <div class="payment-options">
-                                <label class="payment-option">
-                                    <input type="radio" name="payment-method" value="card" checked>
-                                    <span class="option-content">
-                                        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
-                                        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
-                                        Tarjeta de crédito o débito
-                                    </span>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="payment-method" value="paypal">
-                                    <span class="option-content">
-                                        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal">
-                                        PayPal
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="payment-details card-details">
-                                <div class="form-group">
-                                    <label>Nombre en la tarjeta</label>
-                                    <input type="text" placeholder="Ej. Juan Pérez">
-                                </div>
-                                <div class="form-group">
-                                    <label>Número de la tarjeta</label>
-                                    <input type="text" placeholder="0000 0000 0000 0000">
-                                </div>
-                                <div class="form-row card-meta">
-                                    <input type="text" placeholder="Venc. MM/AA">
-                                    <input type="text" placeholder="CVC">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-primary">Finalizar reserva</button>
-                    </form>
-
-                    <aside class="booking-summary" id="booking-summary-aside"></aside>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 4: DESTINOS POPULARES -->
-        <section class="destinations-section">
-            <div class="container">
-                <h2>Tu próximo destino te está esperando</h2>
-                <p class="destinations-subtitle">Compara y reserva tu hotel ideal con un par de clics.</p>
+        <!-- BANNER DE BÚSQUEDA -->
+        <section class="relative bg-cover bg-center h-[380px] flex items-center" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1600&q=80');">
+            <div class="max-w-7xl mx-auto px-8 w-full">
+                <p class="text-xs font-bold text-white uppercase tracking-wider mb-1">MENOS BUSCAR. MÁS VIAJAR.</p>
+                <h1 class="text-4xl font-extrabold text-white mb-2 leading-tight">Tu próxima escapada,<br>al mejor precio.</h1>
+                <p class="text-sm text-white/90 mb-6">Compara hoteles y ofertas de cientos de webs. Tu viaje empieza aquí.</p>
                 
-                <div class="destinations-grid">
-                    <article class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Vista de Lima, Perú">
-                        <div class="destination-info">
-                            <h3>Lima</h3>
-                            <p>Desde S/ 178 / noche</p>
-                        </div>
-                    </article>
-                    
-                    <article class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80" alt="Vista de Cusco, Perú">
-                        <div class="destination-info">
-                            <h3>Cusco</h3>
-                            <p>Desde S/ 215 / noche</p>
-                        </div>
-                    </article>
-                    
-                    <article class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Vista de Máncora, Perú">
-                        <div class="destination-info">
-                            <h3>Máncora</h3>
-                            <p>Desde S/ 156 / noche</p>
-                        </div>
-                    </article>
+                <div class="bg-white rounded-xl shadow-lg p-2 flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    <div class="flex items-center px-4 py-2 w-full md:w-1/3">
+                        <i class="fa-solid fa-location-dot text-trivago-blue text-lg mr-3"></i>
+                        <div class="w-full"><p class="text-[10px] uppercase font-bold text-gray-400">Destino</p><input type="text" value="Cusco, Perú" class="font-bold text-gray-800 text-sm focus:outline-none w-full bg-transparent"></div>
+                    </div>
+                    <!-- ENTRADA INTERACTIVA -->
+                    <div class="flex items-center px-4 py-2 w-full md:w-1/5">
+                        <i class="fa-regular fa-calendar text-trivago-blue text-lg mr-3"></i>
+                        <div class="w-full"><p class="text-[10px] uppercase font-bold text-gray-400">Entrada</p><input type="date" id="input-checkin" value="2026-10-23" class="font-bold text-gray-800 text-sm focus:outline-none w-full bg-transparent cursor-pointer"></div>
+                    </div>
+                    <!-- SALIDA INTERACTIVA -->
+                    <div class="flex items-center px-4 py-2 w-full md:w-1/5">
+                        <i class="fa-regular fa-calendar text-trivago-blue text-lg mr-3"></i>
+                        <div class="w-full"><p class="text-[10px] uppercase font-bold text-gray-400">Salida</p><input type="date" id="input-checkout" value="2026-10-26" class="font-bold text-gray-800 text-sm focus:outline-none w-full bg-transparent cursor-pointer"></div>
+                    </div>
+                    <div class="flex items-center px-4 py-2 w-full md:w-1/4">
+                        <i class="fa-solid fa-user-group text-trivago-blue text-lg mr-3"></i>
+                        <div class="w-full"><p class="text-[10px] uppercase font-bold text-gray-400">Huéspedes y habitaciones</p><p class="font-bold text-gray-800 text-sm">2 adultos · 1 habitación</p></div>
+                    </div>
+                    <div class="p-1 w-full md:w-auto">
+                        <button onclick="cambiarVista('vista-inicio')" class="bg-trivago-blue hover:bg-trivago-hoverBlue text-white font-bold py-3 px-8 rounded-lg flex items-center justify-center space-x-2 w-full md:w-auto">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Buscar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- PIE DE PÁGINA -->
-    <footer class="main-footer">
-        <div class="container footer-content">
-            <div class="logo">
-                <span class="trivago-logo">trivago</span>
+        <main class="max-w-7xl mx-auto px-8 py-8">
+            <div class="bg-amber-100 border-l-4 border-amber-400 p-4 mb-6 rounded-r-lg flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900">Una escapada a Cusco empieza aquí</h2>
+                    <p class="text-xs text-gray-600">Hoteles que nos encantan para el 23–26 de octubre · 2 adultos · 1 habitación</p>
+                </div>
+                <a href="#" class="text-trivago-green font-bold text-sm hover:underline flex items-center">
+                    Ver todos los hoteles <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
             </div>
-            <p>&copy; 2026 trivago | Todos los derechos reservados</p>
-            <div class="footer-links">
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
-                <a href="#">Contacto</a>
-            </div>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
+            <!-- FILTROS -->
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-2 text-xs font-semibold">
+                <div class="flex flex-wrap gap-2">
+                    <button class="bg-blue-50 border border-trivago-blue text-trivago-blue px-3 py-1.5 rounded-full flex items-center">
+                        <i class="fa-solid fa-check mr-1"></i> Recomendados
+                    </button>
+                    <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-full hover:bg-gray-50">Cancelación gratuita</button>
+                    <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-full hover:bg-gray-50">Desayuno incluido</button>
+                    <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-full hover:bg-gray-50">4 estrellas o más</button>
+                </div>
+                <div class="text-gray-500">
+                    Ordenar por: <span class="font-bold text-gray-800 cursor-pointer">Recomendados <i class="fa-solid fa-chevron-down text-[10px]"></i></span>
+                </div>
+            </div>
+
+            <!-- LISTA DE HOTELES -->
+            <div class="space-y-4" id="contenedor-hoteles"></div>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VISTA 2: DETALLES DEL HOTEL                -->
+    <!-- ========================================== -->
+    <div id="vista-hotel" class="app-view">
+        <header class="bg-white border-b border-gray-200 py-3 px-8 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <a href="javascript:void(0)" onclick="cambiarVista('vista-inicio')" class="text-trivago-blue font-extrabold text-2xl">trivago</a>
+                <button class="border border-gray-300 rounded-md px-3 py-1 text-xs">Iniciar sesión</button>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-8 py-6">
+            <button onclick="cambiarVista('vista-inicio')" class="text-trivago-blue text-xs font-bold hover:underline mb-4 flex items-center">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Volver a los resultados
+            </button>
+            <div id="detalle-hotel-dinamico"></div>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VISTA 3: CHECKOUT Y PASARELA DE PAGO       -->
+    <!-- ========================================== -->
+    <div id="vista-reserva" class="app-view">
+        <header class="bg-white border-b border-gray-200 py-3 px-8 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="javascript:void(0)" onclick="cambiarVista('vista-inicio')" class="text-trivago-blue font-extrabold text-2xl">trivago</a>
+                <div class="flex items-center space-x-6 text-xs font-semibold">
+                    <span class="text-gray-400"><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Hotel elegido</span>
+                    <span class="text-trivago-blue font-bold border-b-2 border-trivago-blue pb-1">2. Reserva y pago</span>
+                    <span class="text-gray-400">3. Confirmación</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 space-y-6">
+                <button onclick="cambiarVista('vista-hotel')" class="text-trivago-blue text-xs font-bold hover:underline flex items-center">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Volver a los detalles
+                </button>
+                
+                <h1 class="text-2xl font-bold text-gray-900">Completa tu reserva</h1>
+
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 class="font-bold text-lg mb-4 flex items-center">
+                        <span class="bg-sky-100 text-trivago-blue w-7 h-7 rounded-full flex items-center justify-center text-xs mr-2">1</span>
+                        Tus datos
+                    </h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Nombre</label><input type="text" value="Lucía" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Apellidos</label><input type="text" value="García López" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Correo electrónico</label><input type="email" value="lucia.garcia@correo.com" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Teléfono</label><input type="tel" value="+51 987 654 321" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 class="font-bold text-lg mb-4 flex items-center">
+                        <span class="bg-sky-100 text-trivago-blue w-7 h-7 rounded-full flex items-center justify-center text-xs mr-2">2</span>
+                        Elige cómo pagar
+                    </h2>
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <div id="tab-tarjeta" onclick="seleccionarMetodoPago('tarjeta')" class="border-2 border-trivago-blue bg-sky-50 rounded-lg p-3 text-center cursor-pointer">
+                            <i class="fa-regular fa-credit-card text-trivago-blue text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-gray-800">Tarjeta</p>
+                        </div>
+                        <div id="tab-yape" onclick="seleccionarMetodoPago('yape')" class="border border-gray-300 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-50">
+                            <i class="fa-solid fa-mobile-screen text-gray-500 text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-gray-800">Yape</p>
+                        </div>
+                        <div id="tab-efectivo" onclick="seleccionarMetodoPago('efectivo')" class="border border-gray-300 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-50">
+                            <i class="fa-solid fa-barcode text-gray-500 text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-gray-800">PagoEfectivo</p>
+                        </div>
+                    </div>
+
+                    <!-- PASARELA DE PAGOS COMPLETA PARA TARJETA -->
+                    <div id="contenedor-pago-tarjeta" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Número de tarjeta</label>
+                            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Fecha de expiración</label>
+                                <input type="text" placeholder="MM / AA" maxlength="5" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Código CVV</label>
+                                <input type="password" placeholder="123" maxlength="4" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Nombre del titular de la tarjeta</label>
+                            <input type="text" placeholder="Como figura en la tarjeta" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENIDO RESUMEN PAGO DINÁMICO -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-fit" id="resumen-reserva-dinamico"></div>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VISTA 4: CONFIRMACIÓN EXITOSA              -->
+    <!-- ========================================== -->
+    <div id="vista-confirmacion" class="app-view">
+        <header class="bg-white border-b border-gray-200 py-3 px-8">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="javascript:void(0)" onclick="cambiarVista('vista-inicio')" class="text-trivago-blue font-extrabold text-2xl">trivago</a>
+                <button onclick="cambiarVista('vista-inicio')" class="text-xs font-bold text-trivago-blue hover:underline flex items-center">
+                    <i class="fa-solid fa-house mr-1"></i> Volver al inicio
+                </button>
+            </div>
+        </header>
+
+        <main class="max-w-5xl mx-auto px-6 py-10 space-y-6">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6 flex items-center space-x-4">
+                <div class="bg-emerald-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-emerald-900">¡Reserva confirmada!</h1>
+                    <p class="text-sm text-emerald-700">Tu reserva ha sido realizada con éxito.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6" id="resumen-confirmacion-dinamico"></div>
+        </main>
+    </div>
+
+    <!-- LÓGICA Y NAVEGACIÓN -->
+    <script>
+        const HOTELES = [
+            {
+                id: 1,
+                nombre: "Hotel Monasterio",
+                estrellas: 5,
+                ubicacion: "Centro histórico · A 0,4 km de la Plaza de Armas",
+                puntuacion: 9.2,
+                calificacion: "Excepcional",
+                opiniones: 1842,
+                etiqueta: "Ubicación ideal para Machu Picchu",
+                proveedor: "Booking.com",
+                precioBase: 189,
+                precioAnterior: 224,
+                imagenMain: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'm1', nombre: "Habitación Deluxe", desc: "2 adultos · 1 cama doble o 2 individuales", precio: 189, img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'm2', nombre: "Suite Colonial con Calefacción", desc: "2 adultos · Vista al claustro colonial", precio: 280, img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'm3', nombre: "Habitación Ejecutiva Imperial", desc: "2 adultos · Incluye desayuno buffet andino", precio: 340, img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: 2,
+                nombre: "Hotel Casa Andina Standard Cusco",
+                estrellas: 4,
+                ubicacion: "San Blas · A 0,8 km de la Plaza de Armas",
+                puntuacion: 8.7,
+                calificacion: "Excelente",
+                opiniones: 2316,
+                etiqueta: "Excelente ubicación en el centro",
+                proveedor: "Expedia",
+                precioBase: 156,
+                precioAnterior: 182,
+                imagenMain: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'c1', nombre: "Habitación Standard Matrimonial", desc: "2 adultos · 1 cama Queen", precio: 156, img: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'c2', nombre: "Habitación Superior Twin", desc: "2 adultos · 2 camas individuales", precio: 195, img: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: 3,
+                nombre: "Hotel Picoaga Cusco",
+                estrellas: 4,
+                ubicacion: "Centro histórico · A 0,2 km de la Plaza de Armas",
+                puntuacion: 9.1,
+                calificacion: "Excepcional",
+                opiniones: 1507,
+                etiqueta: "Casona colonial del siglo XVII",
+                proveedor: "Hotels.com",
+                precioBase: 172,
+                precioAnterior: 205,
+                imagenMain: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'p1', nombre: "Habitación Clásica Colonial", desc: "2 adultos · 1 cama doble", precio: 172, img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'p2', nombre: "Habitación Familiar Superior", desc: "3 adultos · 2 camas Queen", precio: 240, img: "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: 4,
+                nombre: "Palacio del Inka, Luxury Collection",
+                estrellas: 5,
+                ubicacion: "Frente al Qorikancha · A 0,3 km de la Plaza",
+                puntuacion: 9.5,
+                calificacion: "Impresionante",
+                opiniones: 3120,
+                etiqueta: "Palacio del siglo XVI con Spa",
+                proveedor: "Marriott.com",
+                precioBase: 310,
+                precioAnterior: 380,
+                imagenMain: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'pa1', nombre: "Habitación Classic King", desc: "2 adultos · Vista a jardines interiores", precio: 310, img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'pa2', nombre: "Suite del Inka con Mayordomo", desc: "2 adultos · Circuito térmico incluido", precio: 450, img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: 5,
+                nombre: "Tierra Viva Cusco Centro",
+                estrellas: 3,
+                ubicacion: "A 2 cuadras de la Plaza San Francisco",
+                puntuacion: 8.9,
+                calificacion: "Excelente",
+                opiniones: 980,
+                etiqueta: "Ambiente acogedor y moderno",
+                proveedor: "Agoda",
+                precioBase: 135,
+                precioAnterior: 160,
+                imagenMain: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'tv1', nombre: "Habitación Standard Matrimonial", desc: "2 adultos · Desayuno buffet incluido", precio: 135, img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'tv2', nombre: "Habitación Superior King", desc: "2 adultos · Calefacción e insumos andinos", precio: 170, img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: 6,
+                nombre: "JW Marriott El Convento Cusco",
+                estrellas: 5,
+                ubicacion: "Centro histórico · A 0,1 km de la Plaza de Armas",
+                puntuacion: 9.6,
+                calificacion: "Impresionante",
+                opiniones: 2890,
+                etiqueta: "Sistema enriquecido con oxígeno",
+                proveedor: "Booking.com",
+                precioBase: 345,
+                precioAnterior: 410,
+                imagenMain: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+                galeria: [
+                    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=400&q=80"
+                ],
+                habitaciones: [
+                    { id: 'jw1', nombre: "Habitación Deluxe con Oxígeno", desc: "2 adultos · Cama King size", precio: 345, img: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=300&q=80" },
+                    { id: 'jw2', nombre: "Suite Colonial de Lujo", desc: "2 adultos · Patio interior privado", precio: 510, img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=300&q=80" }
+                ]
+            }
+        ];
+
+        let hotelSeleccionado = HOTELES[0];
+        let habitacionSeleccionada = HOTELES[0].habitaciones[0];
+
+        function cambiarVista(idVista) {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(idVista).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderizarHoteles() {
+            const contenedor = document.getElementById('contenedor-hoteles');
+            contenedor.innerHTML = HOTELES.map(hotel => `
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition">
+                    <div class="relative w-full md:w-80 h-48 md:h-auto flex-shrink-0 cursor-pointer" onclick="verHotel(${hotel.id})">
+                        <img src="${hotel.imagenMain}" alt="${hotel.nombre}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-1">
+                                <h3 class="font-bold text-lg text-gray-900 cursor-pointer hover:text-trivago-blue" onclick="verHotel(${hotel.id})">${hotel.nombre}</h3>
+                                <div class="text-amber-400 text-xs">
+                                    ${'<i class="fa-solid fa-star"></i>'.repeat(hotel.estrellas)}
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-location-dot mr-1"></i>${hotel.ubicacion}</p>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="bg-trivago-green text-white font-bold text-xs px-1.5 py-0.5 rounded">${hotel.puntuacion}</span>
+                                <span class="font-bold text-xs text-gray-800">${hotel.calificacion}</span>
+                                <span class="text-xs text-gray-400">(${hotel.opiniones} opiniones)</span>
+                            </div>
+                            <span class="inline-block bg-sky-100 text-trivago-blue text-[11px] font-bold px-2 py-0.5 rounded mt-2">
+                                ${hotel.etiqueta}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 border-t md:border-t-0 md:border-l border-gray-200 p-4 w-full md:w-64 flex flex-col justify-between text-right">
+                        <p class="text-[11px] text-gray-400">Oferta de ${hotel.proveedor}</p>
+                        <div>
+                            <p class="text-xs text-gray-400 line-through">${hotel.precioAnterior} S/.</p>
+                            <p class="text-2xl font-extrabold text-gray-900">${hotel.precioBase} S/. <span class="text-xs font-normal text-gray-500">/ noche</span></p>
+                            <p class="text-[11px] text-trivago-green font-bold">Cancelación gratuita</p>
+                        </div>
+                        <div class="mt-3">
+                            <button onclick="verHotel(${hotel.id})" class="bg-trivago-blue hover:bg-trivago-hoverBlue text-white font-bold py-2 px-4 rounded-md w-full text-sm flex items-center justify-center space-x-1">
+                                <span>Ver oferta</span>
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function verHotel(id) {
+            hotelSeleccionado = HOTELES.find(h => h.id === id) || HOTELES[0];
+            const contenedor = document.getElementById('detalle-hotel-dinamico');
+
+            contenedor.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="md:col-span-2 grid grid-cols-3 gap-2 h-80 rounded-xl overflow-hidden">
+                        <img src="${hotelSeleccionado.galeria[0]}" class="col-span-2 w-full h-full object-cover">
+                        <div class="grid grid-rows-2 gap-2 h-full">
+                            <img src="${hotelSeleccionado.galeria[1]}" class="w-full h-full object-cover">
+                            <img src="${hotelSeleccionado.galeria[2]}" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs text-gray-500">Desde</span>
+                            <p class="text-3xl font-extrabold text-gray-900">S/ ${hotelSeleccionado.precioBase} <span class="text-xs font-normal text-gray-500">/ noche</span></p>
+                            <p class="text-[11px] text-gray-400 mb-4">Impuestos y tasas incluidos</p>
+                            <div class="bg-emerald-50 text-trivago-green p-2 rounded-lg text-xs font-bold flex items-center mb-2">
+                                <i class="fa-solid fa-circle-check mr-2"></i> Cancelación gratuita
+                            </div>
+                        </div>
+                        <div>
+                            <button onclick="seleccionarHabitacion('${hotelSeleccionado.habitaciones[0].id}')" class="bg-trivago-blue hover:bg-trivago-hoverBlue text-white font-bold py-3 px-4 rounded-lg block text-center w-full">
+                                Seleccionar habitación <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-1">${hotelSeleccionado.nombre}</h1>
+                <p class="text-xs text-gray-500 mb-6"><i class="fa-solid fa-location-dot mr-1"></i> ${hotelSeleccionado.ubicacion}</p>
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Habitaciones disponibles</h2>
+                <div class="space-y-4">
+                    ${hotelSeleccionado.habitaciones.map(hab => `
+                        <div class="bg-white p-4 rounded-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div class="flex items-center space-x-4">
+                                <img src="${hab.img}" class="w-32 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-bold text-gray-900">${hab.nombre}</h3>
+                                    <p class="text-xs text-gray-500">${hab.desc}</p>
+                                </div>
+                            </div>
+                            <div class="text-right flex flex-col items-end">
+                                <p class="text-xl font-extrabold text-gray-900">S/ ${hab.precio} <span class="text-xs font-normal text-gray-500">/ noche</span></p>
+                                <button onclick="seleccionarHabitacion('${hab.id}')" class="mt-2 bg-trivago-blue hover:bg-trivago-hoverBlue text-white font-bold py-2 px-6 rounded-lg text-sm">
+                                    Seleccionar
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            cambiarVista('vista-hotel');
+        }
+
+        function seleccionarHabitacion(habId) {
+            habitacionSeleccionada = hotelSeleccionado.habitaciones.find(h => h.id === habId) || hotelSeleccionado.habitaciones[0];
+            const total = habitacionSeleccionada.precio * 3;
+
+            document.getElementById('resumen-reserva-dinamico').innerHTML = `
+                <h3 class="font-bold text-gray-900 mb-4">Tu reserva, de un vistazo</h3>
+                <img src="${hotelSeleccionado.imagenMain}" class="w-full h-32 object-cover rounded-lg mb-4">
+                <h4 class="font-bold text-gray-900">${hotelSeleccionado.nombre}</h4>
+                <p class="text-xs text-gray-500 mb-1">${habitacionSeleccionada.nombre}</p>
+                <p class="text-xs text-gray-400 mb-4">${hotelSeleccionado.ubicacion}</p>
+                <div class="border-t border-b border-gray-100 py-3 space-y-2 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">${habitacionSeleccionada.precio} S/. × 3 noches</span>
+                        <span class="font-bold">${total} S/.</span>
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <span>Impuestos y tasas</span>
+                        <span>Incluidos</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center my-4">
+                    <span class="font-bold text-gray-900">Total</span>
+                    <span class="text-2xl font-extrabold text-gray-900">${total} S/.</span>
+                </div>
+                <button onclick="realizarReservaExito(${total})" class="bg-trivago-blue hover:bg-trivago-hoverBlue text-white font-bold py-3 px-4 rounded-lg block text-center w-full shadow-md">
+                    Realizar reserva <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            `;
+            cambiarVista('vista-reserva');
+        }
+
+        function seleccionarMetodoPago(metodo) {
+            ['tarjeta', 'yape', 'efectivo'].forEach(m => {
+                const tab = document.getElementById(`tab-${m}`);
+                if (m === metodo) {
+                    tab.className = "border-2 border-trivago-blue bg-sky-50 rounded-lg p-3 text-center cursor-pointer";
+                } else {
+                    tab.className = "border border-gray-300 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-50";
+                }
+            });
+        }
+
+        function realizarReservaExito(total) {
+            document.getElementById('resumen-confirmacion-dinamico').innerHTML = `
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-1">${hotelSeleccionado.nombre}</h3>
+                    <p class="text-xs text-gray-500 mb-4">${habitacionSeleccionada.nombre}</p>
+                    <p class="text-xs text-gray-600"><strong class="text-gray-900">Huésped:</strong> Lucía García López</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-600 mb-1"><strong class="text-gray-900">Fechas:</strong> 23 oct 2026 - 26 oct 2026</p>
+                    <p class="text-xs text-gray-600"><strong class="text-gray-900">Método de pago:</strong> Tarjeta de crédito</p>
+                </div>
+                <div class="text-right flex flex-col justify-between">
+                    <span class="text-xs text-gray-400">Total pagado</span>
+                    <p class="text-2xl font-extrabold text-emerald-600">${total} S/.</p>
+                </div>
+            `;
+            cambiarVista('vista-confirmacion');
+        }
+
+        renderizarHoteles();
+    </script>
 </body>
 </html>
