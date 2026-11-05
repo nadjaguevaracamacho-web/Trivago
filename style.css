@@ -105,6 +105,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         font-size: 12px !important;
         white-space: nowrap;
     }
+    /* Corregir distribución del encabezado en celulares */
+@media (max-width: 640px) {
+
+    header .max-w-7xl > div {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-between;
+        gap: 4px !important;
+    }
+
+    header .max-w-7xl > div > button {
+        flex: 1 1 0;
+        min-width: 0;
+        justify-content: center;
+        padding: 7px 4px !important;
+        font-size: 11px !important;
+        white-space: normal;
+    }
+
+    header .max-w-7xl > div > button:last-child span {
+        white-space: normal;
+    }
+}
 
     header button i {
         margin-right: 5px !important;
