@@ -418,7 +418,7 @@
 
         function renderizarHoteles() {
             const contenedor = document.getElementById('contenedor-hoteles');
-            contenedor.innerHTML = HOTELES.map((hotel, index) =>
+           contenedor.innerHTML = HOTELES.map((hotel, index) => `
                 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition">
                     <div class="relative w-full md:w-80 h-48 md:h-auto flex-shrink-0 cursor-pointer" onclick="verHotel(${hotel.id})">
                         <img src="${hotel.imagenMain}"
