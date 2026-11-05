@@ -17,3 +17,65 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     filter: invert(0.4) sepia(1) saturate(5) hue-rotate(170deg);
 }
+
+/* =================================
+   MEJORAS RESPONSIVE PARA TRIVAGO
+   ================================= */
+
+@media (max-width: 640px) {
+
+    /* Evitar desplazamiento horizontal */
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Ajustar espacios del encabezado */
+    header {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    header .max-w-7xl {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Reducir márgenes laterales */
+    main,
+    .app-view {
+        min-width: 0;
+    }
+
+    main {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* Adaptar formularios y campos */
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Adaptar columnas a una sola columna */
+    .grid.grid-cols-2,
+    .grid.grid-cols-3 {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Evitar que las imágenes se salgan */
+    img {
+        max-width: 100%;
+    }
+
+    /* Mejorar la lectura en pantallas pequeñas */
+    h1 {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+    }
+}
+
