@@ -421,12 +421,7 @@
            contenedor.innerHTML = HOTELES.map((hotel, index) => `
                 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition">
                     <div class="relative w-full md:w-80 h-48 md:h-auto flex-shrink-0 cursor-pointer" onclick="verHotel(${hotel.id})">
-                        <img src="${hotel.imagenMain}"
-     alt="${hotel.nombre}"
-     loading="${index === 0 ? 'eager' : 'lazy'}"
-     decoding="async"
-     fetchpriority="${index === 0 ? 'high' : 'auto'}"
-     class="w-full h-full object-cover">
+                    <img src="${hotel.imagenMain}" alt="${hotel.nombre}" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
