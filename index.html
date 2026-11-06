@@ -546,16 +546,28 @@
             cambiarVista('vista-reserva');
         }
 
-        function seleccionarMetodoPago(metodo) {
-            ['tarjeta', 'yape', 'efectivo'].forEach(m => {
-                const tab = document.getElementById(`tab-${m}`);
-                if (m === metodo) {
-                    tab.className = "border-2 border-trivago-blue bg-sky-50 rounded-lg p-3 text-center cursor-pointer";
-                } else {
-                    tab.className = "border border-gray-300 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-50";
-                }
-            });
+      function seleccionarMetodoPago(metodo) {
+    ['tarjeta', 'yape', 'efectivo'].forEach(m => {
+        const tab = document.getElementById(`tab-${m}`);
+
+        if (m === metodo) {
+            tab.className = "border-2 border-trivago-blue bg-sky-50 rounded-lg p-3 text-center cursor-pointer";
+        } else {
+            tab.className = "border border-gray-300 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-50";
         }
+    });
+
+    const tarjeta = document.getElementById('contenedor-pago-tarjeta');
+    const yape = document.getElementById('contenedor-pago-yape');
+
+    if (tarjeta) {
+        tarjeta.classList.toggle('hidden', metodo !== 'tarjeta');
+    }
+
+    if (yape) {
+        yape.classList.toggle('hidden', metodo !== 'yape');
+    }
+}
 
         function realizarReservaExito(total) {
             document.getElementById('resumen-confirmacion-dinamico').innerHTML = `
